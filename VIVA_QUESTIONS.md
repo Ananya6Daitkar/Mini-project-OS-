@@ -1,224 +1,165 @@
-# xv6 Mini Project — Viva Questions and Answers
-**Part X: lectures 25–30 | x86 xv6**
+# Viva Questions — Original IIT xv6 Walkthrough
 
-Use these answers as revision notes. Practise explaining the code and running
-the demonstration, rather than memorising sentences.
+Part X, lectures 25–30. Practise explaining the corresponding source functions.
 
-## Project overview
-**1. What does your project demonstrate?**
-It demonstrates scheduling, process creation, virtual memory, heap management,
-locking and sleep/wakeup using xv6 programs and a shared kernel counter syscall.
+## 1. What is the aim of this mini-project?
 
-**2. What is xv6?**
-A small teaching operating system inspired by Unix Version 6. This project uses
-the x86 version supplied with the course.
+To explain the original xv6 implementation of the six topics in IIT Part X, lectures 25–30.
 
-**3. What did you add?**
-The xv6demo program, a democtl system call with a protected shared counter,
-automated execution checks, and documentation. The base OS is existing xv6.
+## 2. Did you write the operating system?
 
-**4. Why use QEMU?**
-QEMU provides an emulated x86 machine on which the xv6 kernel can boot.
-Docker supplies the Linux build environment; it is not the xv6 kernel.
+No. The code is the existing x86 xv6 supplied by the IIT course. The additions are explanatory documents.
 
-## Lecture 25 — Scheduling and context switching
-**5. What is the difference between RUNNABLE and RUNNING?**
-A runnable process is ready to execute. A running process is executing on a CPU.
+## 3. Why use QEMU?
 
-**6. How does the basic scheduler choose processes?**
-It repeatedly scans the process table and runs runnable processes. It is commonly
-described as round-robin-style scheduling; it does not promise exact equal timing.
+It emulates the x86 computer that boots xv6. Linux runs the build tools and QEMU; xv6 runs inside the emulator.
 
-**7. What causes preemption?**
-A timer interrupt can cause the running process to yield, allowing another
-runnable process to execute.
+## 4. Is VS Code required?
 
-**8. What does swtch save?**
-The x86 implementation saves the callee-saved registers and switches stack
-pointers. The return address supplies the saved instruction position.
-It does not save the entire user trap frame.
+No. It is a convenient editor and terminal interface. The build uses make and the execution uses QEMU.
 
-**9. Is a trap the same as a context switch?**
-No. A trap enters the kernel because of an interrupt, exception or system call.
-A context switch changes the executing kernel context; a trap need not do that.
+## 5. What is RUNNABLE versus RUNNING?
 
-**10. Why run the demo with one CPU and two CPUs?**
-One CPU illustrates time sharing. Two CPUs permit parallel execution and make
-shared-state synchronization especially relevant.
+RUNNABLE means ready for a CPU. RUNNING means currently executing on one.
 
-**11. Does worker completion prove fair scheduling?**
-No. It confirms that the workers completed in this run. Fairness and exact switch
-counts require additional measurements or tracing.
+## 6. What does scheduler do?
 
-## Lecture 26 — Process creation
-**12. What does fork return?**
-Zero in the child, the child's PID in the parent, and -1 on failure.
+It scans the process table and selects runnable processes to execute.
 
-**13. Does the child share the parent's ordinary variables?**
-Not in this base xv6. The child gets a copied user address space, so changing
-its local variable does not change the parent's copy.
+## 7. What causes timer preemption?
 
-**14. How is exec different from fork?**
-Fork creates a new process. Exec replaces the calling process's user program
-and address space while retaining its process identity.
+A timer interrupt can lead to yield, allowing another runnable process to execute.
 
-**15. Does a successful exec return?**
-No. Execution starts in the new program. A failure returns -1 to the caller.
+## 8. What does swtch do?
 
-**16. What does wait do?**
-It waits for a child to exit and reclaims its remaining process resources.
-It returns a child's PID or -1 when there is no applicable child.
+It saves the x86 callee-saved registers and switches kernel stacks and contexts. It does not save the entire user trap frame.
 
-**17. What is a zombie?**
-An exited process whose bookkeeping remains until its parent reaps it.
+## 9. Is a trap a context switch?
 
-**18. How is the first user process created?**
-The kernel calls userinit, which sets up the first process, initial user code,
-address space and trap frame. That initial code executes init.
+No. A trap enters kernel code; a context switch changes which context executes. Not every trap causes a switch.
 
-## Lectures 27–28 — Memory
-**19. What is a virtual address?**
-An address used by a process that the CPU translates through paging structures
-to access physical memory, subject to permissions.
+## 10. What does fork return?
 
-**20. What is the page size here?**
-4,096 bytes, or 4 KiB.
+Zero in the child, the child PID in the parent, or -1 on failure.
 
-**21. How is a 32-bit address divided for this paging scheme?**
-Ten directory-index bits, ten page-table-index bits and twelve offset bits.
+## 11. Does a child share ordinary variables with its parent?
 
-**22. What does walkpgdir do?**
-It locates the page-table entry for a virtual address, optionally allocating a
-page-table page when necessary.
+This base xv6 copies user memory, so ordinary variables are independent after fork.
 
-**23. What does mappages do?**
-It installs mappings from virtual pages to physical pages with specified flags.
+## 12. How is exec different from fork?
 
-**24. What do PTE_P, PTE_W and PTE_U mean?**
-Present, writable and user-accessible. Access depends on the applicable paging
-permissions, not just the numerical address.
+Fork creates a process. Exec replaces the current user program while keeping its process identity.
 
-**25. What does sbrk return?**
-On success, the old program break. A positive argument grows the heap and a
-negative argument shrinks it. Failure returns (char *)-1.
+## 13. Does successful exec return to its caller?
 
-**26. How is malloc different from sbrk?**
-Malloc is a user-space allocator that manages blocks. It can obtain more heap
-space with sbrk; each malloc call need not invoke the kernel.
+No. The new program begins executing. Failure returns -1.
 
-**27. Does this xv6 use lazy allocation or copy-on-write fork?**
-No. This project uses the base eager allocation and copying implementation.
-Those techniques would require separate kernel changes.
+## 14. What does wait do?
 
-**28. What is the purpose of the guard page near the user stack?**
-Its user access is disabled to help catch stack accesses beyond the permitted
-region. It is not automatic stack growth.
+It reaps an exited child and can sleep while waiting for one. It returns a child PID or -1 when appropriate.
 
-**29. Does the printed virtual address reveal a physical address?**
-No. The demo only decomposes the virtual address into fields. Finding the
-physical frame requires examining the actual page-table mapping.
+## 15. What is a zombie?
 
-**30. Is requesting 12,288 bytes always the same as mapping three new pages?**
-The break grows by three page sizes. The covered byte interval can start
-unaligned; allocation operates on page boundaries and depends on prior mappings.
+An exited process whose remaining bookkeeping has not yet been reaped by its parent.
 
-## Lecture 29 — Locking
-**31. What is a race condition?**
-A result incorrectly depends on the timing or interleaving of concurrent accesses
-to shared state.
+## 16. What creates the first user process?
 
-**32. Why is counter++ not automatically safe?**
-It is a read-modify-write operation. Two CPUs can read the same old value and
-one update can overwrite the other.
+userinit sets up the first user process. Its initial code executes init.
 
-**33. Why put the demo counter in the kernel?**
-Forked processes have separate user memory, but can reach the same kernel counter
-through the syscall. This creates a real shared resource for the experiment.
+## 17. What is virtual memory?
 
-**34. What is a spinlock?**
-A mutual-exclusion lock that repeatedly tries an atomic operation until it owns
-the lock. It suits short critical sections where sleeping is inappropriate.
+A process uses virtual addresses that paging hardware translates to physical memory subject to access permissions.
 
-**35. Why disable local interrupts while holding a spinlock?**
-To prevent an interrupt handler on the same CPU from trying to obtain the same
-lock and waiting forever for the interrupted code to release it.
+## 18. What is the page size?
 
-**36. Is disabling interrupts enough on a multiprocessor?**
-No. Other CPUs still execute. The atomic lock operation provides inter-CPU
-mutual exclusion.
+4 KiB, or 4,096 bytes.
 
-**37. Why are memory barriers relevant?**
-They prevent critical memory operations from being reordered across lock
-acquisition or release in ways that break synchronization.
+## 19. How is a 32-bit virtual address split?
 
-**38. Why should a process not sleep holding an ordinary spinlock?**
-It may prevent other execution from obtaining that lock and making progress.
-The kernel sleep(chan, lock) protocol explicitly releases its supplied condition
-lock while coordinating the state transition; that is a special handoff.
+For this two-level paging scheme: 10 directory-index bits, 10 page-table-index bits, and 12 offset bits.
 
-**39. What result should the counter test produce?**
-Four children times 1,000 increments equals 4,000. The demo resets before
-starting children and reads after they finish. Run one demo at a time.
+## 20. What does walkpgdir do?
 
-## Lecture 30 — Sleep and wakeup
-**40. How does sleeping differ from busy waiting?**
-A sleeping process is not runnable until a relevant event occurs. A busy waiter
-continues consuming CPU while repeatedly checking a condition.
+Finds the page-table entry for a virtual address, optionally allocating a page-table page.
 
-**41. What is a sleep channel?**
-A kernel identifier, commonly an address, used to group waiters for an event.
-It is not a user-space message queue.
+## 21. What does mappages do?
 
-**42. What is a lost wakeup?**
-A notification occurs after a process checks a condition but before it safely
-registers as sleeping, leaving it asleep despite the event having occurred.
+Creates virtual-to-physical page mappings with the requested permissions.
 
-**43. How does xv6 coordinate sleep with wakeup?**
-The condition lock and ptable.lock protect the handoff between condition checking
-and marking the process asleep. Wakeup examines process state with ptable.lock.
+## 22. What are PTE_P, PTE_W, and PTE_U?
 
-**44. Why check a condition in a while loop after waking?**
-Being woken only means it may be worth checking again. Another process may have
-consumed the resource before this process runs.
+Present, writable, and user-accessible flags.
 
-**45. Does wakeup immediately execute the waiting process?**
-No. It makes matching sleeping processes runnable. The scheduler decides when
-they execute.
+## 23. What does sbrk do?
 
-**46. When does a pipe read return EOF?**
-When no buffered data remains and all references to the write end are closed.
-Unused descriptors must be closed in both parent and child.
+Changes the program break. It returns the old break on success and (char *)-1 on failure.
 
-**47. Does the delayed pipe test prove the parent slept?**
-Not by itself. If scheduling delays the parent, data could arrive before its
-read. The test validates delivery and elapsed time; source inspection explains
-the blocking path. State tracing would be stronger evidence.
+## 24. What is the allocation call path?
 
-## Questions about the implementation
-**48. Which files connect a new syscall?**
-user.h declares it, usys.S supplies the user stub, syscall.h assigns a number,
-syscall.c dispatches it, and sysproc.c decodes the argument. defs.h declares
-the internal kernel operation implemented in proc.c.
+sys_sbrk calls growproc, which uses allocuvm or deallocuvm to change the memory allocation.
 
-**49. Why is democtl not a production counter service?**
-It is a global teaching interface. Any process can reset it; there is no per-user
-isolation. Simultaneous demo runs can interfere with one another.
+## 25. Is malloc the same as sbrk?
 
-**50. What would you improve next?**
-Add per-process scheduling statistics, a safe page-table inspection syscall,
-and stronger automated concurrency tests. These are future extensions, not
-features claimed by the current project.
+No. malloc manages user-space blocks and can request more heap memory with sbrk.
 
-## One-minute explanation
-“This mini-project covers lectures 25 to 30 using x86 xv6. The demonstration
-creates CPU workers, shows fork and exec, allocates and verifies heap memory,
-updates a shared kernel counter under a spinlock, and transfers data through a
-delayed pipe writer. I can relate each output to its kernel code. The counter
-syscall is the main kernel addition, and the saved run logs provide execution
-evidence. The project demonstrates existing mechanisms; it does not implement
-all the separate course labs.”
+## 26. Does this version implement copy-on-write fork?
 
-## References
-[IIT Bombay course](https://www.cse.iitb.ac.in/~mythili/os/) and the included
-course source, especially proc.c, swtch.S, vm.c, exec.c, spinlock.c and pipe.c.
-[Upstream x86 xv6](https://github.com/mit-pdos/xv6-public).
+No. It copies user memory eagerly. Copy-on-write would require additional implementation.
+
+## 27. What is a race condition?
+
+Incorrect behaviour caused by the timing of concurrent accesses to shared state.
+
+## 28. Why protect a read-modify-write operation?
+
+Two CPUs could read the same old value and overwrite one another’s updates.
+
+## 29. What is a spinlock?
+
+A mutual-exclusion lock that repeatedly attempts an atomic acquisition until it succeeds.
+
+## 30. Why disable local interrupts during spinlock use?
+
+To avoid an interrupt handler on the same CPU waiting for a lock held by the code it interrupted.
+
+## 31. Is disabling interrupts enough across CPUs?
+
+No. Other CPUs continue running; an atomic lock operation provides inter-CPU exclusion.
+
+## 32. How does a sleep lock differ?
+
+A waiting process can sleep instead of consuming CPU by spinning. Spinlocks are intended for short critical sections.
+
+## 33. What is a sleep channel?
+
+A kernel identifier used to associate processes waiting for a particular event.
+
+## 34. What is a lost wakeup?
+
+A notification arrives between checking a condition and safely registering as asleep, leaving a process waiting despite the event.
+
+## 35. How does xv6 coordinate sleep and wakeup?
+
+The condition lock and process-table lock coordinate the condition check and the transition to SLEEPING.
+
+## 36. Why recheck the condition after waking?
+
+Another process may consume the resource before the woken process runs. Wakeup is not a guarantee that the condition remains true.
+
+## 37. Does wakeup immediately run the process?
+
+No. It changes a matching sleeping process to RUNNABLE; the scheduler later chooses it.
+
+## 38. When does a pipe read reach EOF?
+
+When its buffer is empty and every write-end reference is closed.
+
+## 39. What does the live shell demonstration prove?
+
+That xv6 boots and runs the shown programs. It does not independently prove every scheduling, memory, or synchronization property.
+
+## 40. What was changed in this simplified version?
+
+Only documentation was added. Custom experiments, the counter syscall, Docker files, and old test results are preserved on a separate backup branch.
+
+Reference: [IIT course](https://www.cse.iitb.ac.in/~mythili/os/) and the original course source in xv6-public/.

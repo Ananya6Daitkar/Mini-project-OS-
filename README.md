@@ -1,70 +1,51 @@
-# xv6 Mini Project — Part X, Lectures 25–30
+# xv6 Mini Project — IIT Part X, Lectures 25–30
 
-A demonstration of process execution, memory and synchronization in **x86 xv6**.
-Prepared against the IIT Bombay course archive, not the RISC-V version.
+This is a **walkthrough of the original x86 xv6 code supplied by the IIT Bombay course**. It contains no custom kernel feature or xv6demo program.
 
-## Start here
+- [WALKTHROUGH.md](WALKTHROUGH.md): what to explain and show to the teacher.
+- [VIVA_QUESTIONS.md](VIVA_QUESTIONS.md): short questions and answers.
+- `xv6-public/`: original course source, with its original license.
 
-- `PROJECT_REPORT.html`: printable report and teacher demonstration guide.
-- `VIVA_QUESTIONS.html`: separate viva questions with short answers.
-- `xv6-public/`: complete course OS with the project additions.
-- `project-changes.patch`: exact additions and build compatibility changes.
-- `results/`: actual verification logs, once generated.
+## Source
 
-The supplied GitHub repository was empty when checked on 25 October 2026.
-This repository contains the complete source package and demonstration materials.
+[Course page](https://www.cse.iitb.ac.in/~mythili/os/) · [Installation instructions](https://www.cse.iitb.ac.in/~mythili/os/xv6.html) · [Original course archive](https://www.cse.iitb.ac.in/~mythili/os/labs/cs236-xv6-linux.tgz)
 
-## Run using Docker (Mac, Windows with Docker Desktop, or Linux)
+The source files here were checked byte-for-byte against the downloaded course archive. Only documentation has been added. The course archive itself includes a small `mytest` example.
 
-Open a terminal in this folder, then run:
+## Run on Linux
+
+On an Ubuntu/Debian **x86-64 Linux** computer, install the tools once:
 
 ```sh
-docker build -t xv6-mini-project:local .
-docker run --rm -it -v "$PWD:/project" xv6-mini-project:local
+sudo apt update
+sudo apt install build-essential gcc-multilib qemu-system-x86 perl
 ```
 
-Wait for the xv6 `$` prompt and type:
-
-```text
-xv6demo
-```
-
-Look for `EXEC_OK`, all `PASS` lines, `expected=4000 actual=4000`, and
-`DEMO COMPLETE: 0 failed checks`. Worker order and virtual addresses can vary.
-Exit QEMU with Ctrl+A, release, then X. On PowerShell replace `$PWD` in the
-mount argument with `${PWD}` if necessary.
-
-To demonstrate time sharing on a single CPU:
-
-```sh
-docker run --rm -it -v "$PWD:/project" xv6-mini-project:local make TOOLPREFIX=i686-linux-gnu- QEMU=qemu-system-i386 CPUS=1 qemu-nox
-```
-
-The default uses two emulated CPUs, useful for the shared-counter test.
-Docker runs Linux tools; QEMU inside it emulates the x86 machine running xv6.
-
-## Linux without Docker
-
-Install `gcc`, `libc6-dev`, `make`, `perl`, `gcc-i686-linux-gnu`, `binutils-i686-linux-gnu`,
-and `qemu-system-x86` using your distribution's package manager. Then:
+Open this repository folder in VS Code, then select **Terminal → New Terminal**:
 
 ```sh
 cd xv6-public
-make TOOLPREFIX=i686-linux-gnu- QEMU=qemu-system-i386 CPUS=2 qemu-nox
+make clean
+make
+make qemu-nox
 ```
 
-If switching from a different build toolchain, run `make TOOLPREFIX=i686-linux-gnu- clean` first.
+At the xv6 `$` prompt, try:
 
-## Scope and attribution
+```text
+ls
+mytest
+echo hello
+```
 
-This is a lecture demonstration mini-project, not a claim to solve all three
-separate lab assignments on the course page. Original xv6 code belongs to its
-upstream authors; the included LICENSE is preserved. Project additions are
-`xv6demo.c`, the `democtl` syscall, documentation, and verification tooling.
-The new counter is system-wide and deliberately simple: run one demo at a time.
-It has no per-user isolation or production access-control design.
+Exit QEMU with **Ctrl+A**, release, then **X**. Docker is not required. These Linux commands are not native macOS commands.
 
-Course: https://www.cse.iitb.ac.in/~mythili/os/
-Course installation: https://www.cse.iitb.ac.in/~mythili/os/xv6.html
-Base archive: https://www.cse.iitb.ac.in/~mythili/os/labs/cs236-xv6-linux.tgz
-Upstream: https://github.com/mit-pdos/xv6-public
+If QEMU is not detected, use `make QEMU=qemu-system-i386 qemu-nox`. Modern compilers may report warnings as errors in this old course code. If that happens, record the exact error and check the course installation guidance before making a compatibility change. A non-x86 Linux machine needs an x86 cross-compiler; see the course instructions.
+
+## What to present
+
+Follow WALKTHROUGH.md: boot xv6, run the simple commands, then explain the existing kernel functions for lectures 25–30. This is a code walkthrough, not completion of the separate programming labs. The restored original source has not been newly boot-tested during this simplification; previous custom-demo test results do not apply to this version.
+
+## Previous version
+
+The earlier custom demonstration, counter syscall, Docker setup and test logs are preserved on [codex/extended-demo-backup](https://github.com/Ananya6Daitkar/Mini-project-OS-/tree/codex/extended-demo-backup). They are not needed for this walkthrough.

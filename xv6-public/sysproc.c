@@ -89,11 +89,3 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
-
-int
-sys_democtl(void)
-{
-  int op;
-  if(argint(0, &op) < 0) return -1;
-  return democtl(op);
-}

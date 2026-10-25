@@ -12,31 +12,6 @@ struct {
   struct proc proc[NPROC];
 } ptable;
 
-// Shared teaching counter: one instance for all processes and CPUs.
-static struct spinlock demolock;
-static int democount;
-
-// op 0 resets, op 1 increments, op 2 reads. Run one demo at a time.
-int
-democtl(int op)
-{
-  int result;
-  if(op < 0 || op > 2)
-    return -1;
-  acquire(&demolock);
-  if(op == 0) democount = 0;
-  if(op == 1){
-    if(democount == 0x7fffffff){
-      release(&demolock);
-      return -1;
-    }
-    democount++;
-  }
-  result = democount;
-  release(&demolock);
-  return result;
-}
-
 static struct proc *initproc;
 
 int nextpid = 1;
@@ -49,7 +24,6 @@ void
 pinit(void)
 {
   initlock(&ptable.lock, "ptable");
-  initlock(&demolock, "demo-counter");
 }
 
 // Must be called with interrupts disabled
