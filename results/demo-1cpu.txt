@@ -1,0 +1,44 @@
+c[?7l[2J[0mSeaBIOS (version 1.16.2-debian-1.16.2-1)
+
+
+iPXE (http://ipxe.org) 00:03.0 CA00 PCI2.10 PnP PMM+1EFCF160+1EF0F160 CA00
+Press Ctrl-B to configure iPXE (PCI 00:03.0)...                                                                               
+
+
+Booting from Hard Disk..xv6...
+cpu0: starting 0
+sb: size 1000 nblocks 941 ninodes 200 nlog 30 logstart 2 inodestart 32 bmap start 58
+init: starting sh
+$ xv6demo
+XV6 MINI PROJECT | Part X 25-30 | x86
+
+25 SCHEDULING: three CPU-bound children
+worker 0 finished
+worker 1 finished
+worker 2 finished
+PASS: all CPU workers completed (order may vary)
+
+26 PROCESS CREATION: fork, exec, wait
+EXEC_OK: same process, new program
+PASS: wait reaped the created child
+PASS: fork gives independent user memory
+Also verify EXEC_OK above; failed exec prints ERROR.
+
+27-28 MEMORY: allocate, touch and release 3 pages
+PASS: heap grows 12288 bytes and preserves written data
+VA=4000 directory=0 table=4 offset=0
+Address fields only: this does not expose the physical address.
+PASS: heap break restored after release
+
+29 LOCKING: four children increment one kernel counter
+PASS: invalid operations rejected
+PASS: counter reset
+expected=4000 actual=4000
+PASS: spinlock protects shared increments
+
+30 SLEEP/WAKEUP: empty pipe reader waits for writer
+PASS: delayed pipe data received
+PASS: EOF after all write ends close
+Elapsed ticks=20; inspect piperead/sleep/wakeup for mechanism.
+
+DEMO COMPLETE: 0 failed checks

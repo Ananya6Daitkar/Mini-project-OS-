@@ -1,0 +1,147 @@
+i686-linux-gnu-gcc -m32 -gdwarf-2 -Wa,-divide   -c -o vectors.o vectors.S
+gcc -Werror -Wall -o mkfs mkfs.c
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o ulib.o ulib.c
+i686-linux-gnu-gcc -m32 -gdwarf-2 -Wa,-divide   -c -o usys.o usys.S
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o printf.o printf.c
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o umalloc.o umalloc.c
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o xv6demo.o xv6demo.c
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o cat.o cat.c
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o echo.o echo.c
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o forktest.o forktest.c
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o grep.o grep.c
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o init.o init.c
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o kill.o kill.c
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o ln.o ln.c
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o ls.o ls.c
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o mkdir.o mkdir.c
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o rm.o rm.c
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o sh.o sh.c
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o stressfs.o stressfs.c
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o usertests.o usertests.c
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o wc.o wc.c
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o zombie.o zombie.c
+i686-linux-gnu-gcc -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -Wno-array-bounds -Wno-infinite-recursion -fno-omit-frame-pointer -fno-stack-protector -fno-pie -no-pie   -c -o mytest.o mytest.c
+i686-linux-gnu-ld -m    elf_i386 -T kernel.ld -o kernel entry.o bio.o console.o exec.o file.o fs.o ide.o ioapic.o kalloc.o kbd.o lapic.o log.o main.o mp.o picirq.o pipe.o proc.o sleeplock.o spinlock.o string.o swtch.o syscall.o sysfile.o sysproc.o trapasm.o trap.o uart.o vectors.o vm.o  -b binary initcode entryother
+i686-linux-gnu-ld -m    elf_i386 -N -e main -Ttext 0 -o _xv6demo xv6demo.o ulib.o usys.o printf.o umalloc.o
+i686-linux-gnu-ld: warning: entryother: missing .note.GNU-stack section implies executable stack
+i686-linux-gnu-ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+i686-linux-gnu-ld -m    elf_i386 -N -e main -Ttext 0 -o _cat cat.o ulib.o usys.o printf.o umalloc.o
+i686-linux-gnu-ld: warning: usys.o: missing .note.GNU-stack section implies executable stack
+i686-linux-gnu-ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+i686-linux-gnu-ld: warning: _xv6demo has a LOAD segment with RWX permissions
+i686-linux-gnu-ld: warning: usys.o: missing .note.GNU-stack section implies executable stack
+i686-linux-gnu-ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+i686-linux-gnu-ld: warning: _cat has a LOAD segment with RWX permissions
+i686-linux-gnu-objdump -S _xv6demo > xv6demo.asm
+i686-linux-gnu-objdump -S _cat > cat.asm
+i686-linux-gnu-objdump -t _xv6demo | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > xv6demo.sym
+i686-linux-gnu-objdump -t _cat | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > cat.sym
+i686-linux-gnu-ld -m    elf_i386 -N -e main -Ttext 0 -o _echo echo.o ulib.o usys.o printf.o umalloc.o
+# forktest has less library code linked in - needs to be small
+i686-linux-gnu-ld: warning: usys.o: missing .note.GNU-stack section implies executable stack
+i686-linux-gnu-ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+i686-linux-gnu-ld: warning: _echo has a LOAD segment with RWX permissions
+# in order to be able to max out the proc table.
+i686-linux-gnu-ld -m    elf_i386 -N -e main -Ttext 0 -o _forktest forktest.o ulib.o usys.o
+i686-linux-gnu-ld: warning: usys.o: missing .note.GNU-stack section implies executable stack
+i686-linux-gnu-ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+i686-linux-gnu-ld: warning: _forktest has a LOAD segment with RWX permissions
+i686-linux-gnu-objdump -S _echo > echo.asm
+i686-linux-gnu-objdump -S _forktest > forktest.asm
+i686-linux-gnu-objdump -S kernel > kernel.asm
+i686-linux-gnu-objdump -t _echo | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > echo.sym
+i686-linux-gnu-ld -m    elf_i386 -N -e main -Ttext 0 -o _grep grep.o ulib.o usys.o printf.o umalloc.o
+i686-linux-gnu-ld -m    elf_i386 -N -e main -Ttext 0 -o _init init.o ulib.o usys.o printf.o umalloc.o
+i686-linux-gnu-ld: warning: usys.o: missing .note.GNU-stack section implies executable stack
+i686-linux-gnu-ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+i686-linux-gnu-ld: warning: _grep has a LOAD segment with RWX permissions
+i686-linux-gnu-ld: warning: usys.o: missing .note.GNU-stack section implies executable stack
+i686-linux-gnu-ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+i686-linux-gnu-ld: warning: _init has a LOAD segment with RWX permissions
+i686-linux-gnu-objdump -S _grep > grep.asm
+i686-linux-gnu-objdump -S _init > init.asm
+i686-linux-gnu-objdump -t _init | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > init.sym
+i686-linux-gnu-objdump -t _grep | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > grep.sym
+i686-linux-gnu-ld -m    elf_i386 -N -e main -Ttext 0 -o _kill kill.o ulib.o usys.o printf.o umalloc.o
+i686-linux-gnu-ld -m    elf_i386 -N -e main -Ttext 0 -o _ln ln.o ulib.o usys.o printf.o umalloc.o
+i686-linux-gnu-ld: warning: usys.o: missing .note.GNU-stack section implies executable stack
+i686-linux-gnu-ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+i686-linux-gnu-ld: warning: _kill has a LOAD segment with RWX permissions
+i686-linux-gnu-ld: warning: usys.o: missing .note.GNU-stack section implies executable stack
+i686-linux-gnu-ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+i686-linux-gnu-ld: warning: _ln has a LOAD segment with RWX permissions
+i686-linux-gnu-objdump -S _kill > kill.asm
+i686-linux-gnu-objdump -S _ln > ln.asm
+i686-linux-gnu-objdump -t kernel | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > kernel.sym
+i686-linux-gnu-objdump -t _kill | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > kill.sym
+i686-linux-gnu-objdump -t _ln | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > ln.sym
+i686-linux-gnu-ld -m    elf_i386 -N -e main -Ttext 0 -o _ls ls.o ulib.o usys.o printf.o umalloc.o
+i686-linux-gnu-ld: warning: i686-linux-gnu-ld -m    elf_i386 -N -e main -Ttext 0 -o _mkdir mkdir.o ulib.o usys.o printf.o umalloc.o
+usys.o: missing .note.GNU-stack section implies executable stack
+i686-linux-gnu-ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+i686-linux-gnu-ld: warning: _ls has a LOAD segment with RWX permissions
+i686-linux-gnu-ld -m    elf_i386 -N -e main -Ttext 0 -o _rm rm.o ulib.o usys.o printf.o umalloc.o
+i686-linux-gnu-ld: warning: usys.o: missing .note.GNU-stack section implies executable stack
+i686-linux-gnu-ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+i686-linux-gnu-ld: warning: _mkdir has a LOAD segment with RWX permissions
+i686-linux-gnu-ld: warning: usys.o: missing .note.GNU-stack section implies executable stack
+i686-linux-gnu-ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+i686-linux-gnu-ld: warning: _rm has a LOAD segment with RWX permissions
+i686-linux-gnu-objdump -S _ls > ls.asm
+i686-linux-gnu-objdump -S _mkdir > mkdir.asm
+i686-linux-gnu-objdump -S _rm > rm.asm
+i686-linux-gnu-objdump -t _ls | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > ls.sym
+i686-linux-gnu-objdump -t _mkdir | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > mkdir.sym
+i686-linux-gnu-ld -m    elf_i386 -N -e main -Ttext 0 -o _sh sh.o ulib.o usys.o printf.o umalloc.o
+i686-linux-gnu-ld: warning: i686-linux-gnu-objdump -t _rm | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > rm.sym
+usys.o: missing .note.GNU-stack section implies executable stack
+i686-linux-gnu-ld -m    elf_i386 -N -e main -Ttext 0 -o _stressfs stressfs.o ulib.o usys.o printf.o umalloc.o
+i686-linux-gnu-ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+i686-linux-gnu-ld: warning: _sh has a LOAD segment with RWX permissions
+i686-linux-gnu-ld -m    elf_i386 -N -e main -Ttext 0 -o _wc wc.o ulib.o usys.o printf.o umalloc.o
+i686-linux-gnu-ld: warning: usys.o: missing .note.GNU-stack section implies executable stack
+i686-linux-gnu-ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+i686-linux-gnu-ld: warning: _stressfs has a LOAD segment with RWX permissions
+i686-linux-gnu-ld: warning: usys.o: missing .note.GNU-stack section implies executable stack
+i686-linux-gnu-ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+i686-linux-gnu-ld: warning: _wc has a LOAD segment with RWX permissions
+i686-linux-gnu-objdump -S _sh > sh.asm
+i686-linux-gnu-objdump -S _stressfs > stressfs.asm
+i686-linux-gnu-objdump -S _wc > wc.asm
+i686-linux-gnu-objdump -t _stressfs | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > stressfs.sym
+i686-linux-gnu-objdump -t _sh | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > sh.sym
+i686-linux-gnu-ld -m    elf_i386 -N -e main -Ttext 0 -o _zombie zombie.o ulib.o usys.o printf.o umalloc.o
+i686-linux-gnu-objdump -t _wc | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > wc.sym
+i686-linux-gnu-ld -m    elf_i386 -N -e main -Ttext 0 -o _mytest mytest.o ulib.o usys.o printf.o umalloc.o
+i686-linux-gnu-ld: warning: usys.o: missing .note.GNU-stack section implies executable stack
+i686-linux-gnu-ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+i686-linux-gnu-ld: warning: _zombie has a LOAD segment with RWX permissions
+dd if=/dev/zero of=xv6.img count=10000
+i686-linux-gnu-ld: warning: usys.o: missing .note.GNU-stack section implies executable stack
+i686-linux-gnu-ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+i686-linux-gnu-ld: warning: _mytest has a LOAD segment with RWX permissions
+i686-linux-gnu-objdump -S _zombie > zombie.asm
+i686-linux-gnu-objdump -S _mytest > mytest.asm
+i686-linux-gnu-objdump -t _zombie | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > zombie.sym
+i686-linux-gnu-objdump -t _mytest | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > mytest.sym
+i686-linux-gnu-ld -m    elf_i386 -N -e main -Ttext 0 -o _usertests usertests.o ulib.o usys.o printf.o umalloc.o
+i686-linux-gnu-ld: warning: usys.o: missing .note.GNU-stack section implies executable stack
+i686-linux-gnu-ld: NOTE: This behaviour is deprecated and will be removed in a future version of the linker
+i686-linux-gnu-ld: warning: _usertests has a LOAD segment with RWX permissions
+i686-linux-gnu-objdump -S _usertests > usertests.asm
+i686-linux-gnu-objdump -t _usertests | sed '1,/SYMBOL TABLE/d; s/ .* / /; /^$/d' > usertests.sym
+./mkfs fs.img README _xv6demo _cat _echo _forktest _grep _init _kill _ln _ls _mkdir _rm _sh _stressfs _usertests _wc _zombie _mytest 
+nmeta 59 (boot, super, log blocks 30 inode blocks 26, bitmap blocks 1) blocks 941 total 1000
+balloc: first 702 blocks have been allocated
+balloc: write bitmap block at sector 58
+10000+0 records in
+10000+0 records out
+5120000 bytes (5.1 MB, 4.9 MiB) copied, 0.686952 s, 7.5 MB/s
+dd if=bootblock of=xv6.img conv=notrunc
+1+0 records in
+1+0 records out
+512 bytes copied, 0.00194342 s, 263 kB/s
+dd if=kernel of=xv6.img seek=1 conv=notrunc
+391+1 records in
+391+1 records out
+200600 bytes (201 kB, 196 KiB) copied, 0.0902068 s, 2.2 MB/s
